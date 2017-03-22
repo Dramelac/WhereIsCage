@@ -19,12 +19,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlayActivity" />
-        <activity android:name=".ChronoMenuActivity" />
+        <activity android:name=".ChronoMenuActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ScoreboardActivity"
             android:label="@string/title_activity_scoreboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PlayChronoActivity"></activity>
+        <activity android:name=".PlayChronoActivity" />
     </application>
 
 </manifest>

@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startScoreboardMenu(View view){
-
+        Intent newFrame = new Intent(this, ScoreboardActivity.class);
+        startActivity(newFrame);
     }
 
 }

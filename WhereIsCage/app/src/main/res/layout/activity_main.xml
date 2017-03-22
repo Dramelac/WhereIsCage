@@ -14,19 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/PlayStandartBtn"
-        android:onClick="startStandartGame (MainActivity)" />
+        android:onClick="startStandartGame" />
 
     <Button
         android:text="Play Chrono Mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/PlayChronoBtn"
-        android:onClick="startChronoMenu (MainActivity)" />
+        android:onClick="startChronoMenu" />
 
     <Button
         android:text="Scoreboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ScoreboardBtn"
-        android:onClick="startScoreboardMenu (MainActivity)" />
+        android:onClick="startScoreboardMenu" />
 </LinearLayout>
