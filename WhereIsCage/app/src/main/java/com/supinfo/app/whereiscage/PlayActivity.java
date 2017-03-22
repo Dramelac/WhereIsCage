@@ -1,8 +1,7 @@
 package com.supinfo.app.whereiscage;
 
-import android.support.annotation.DrawableRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -17,7 +16,7 @@ public class PlayActivity extends AppCompatActivity {
         image.setImageResource(R.drawable.w_cage1);
     }
 
-    public void surrende(View view){
+    public void surrender(View view) {
         finish();
     }
 }
