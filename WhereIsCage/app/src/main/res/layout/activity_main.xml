@@ -9,17 +9,24 @@
     tools:context="com.supinfo.app.whereiscage.MainActivity">
 
 
-    <LinearLayout
+    <Button
+        android:text="Play normal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:id="@+id/PlayStandartBtn"
+        android:onClick="startStandartGame (MainActivity)" />
 
-        <Button
-            android:id="@+id/playBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="startGame"
-            android:text="Play" />
-    </LinearLayout>
+    <Button
+        android:text="Play Chrono Mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PlayChronoBtn"
+        android:onClick="startChronoMenu (MainActivity)" />
 
+    <Button
+        android:text="Scoreboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ScoreboardBtn"
+        android:onClick="startScoreboardMenu (MainActivity)" />
 </LinearLayout>
