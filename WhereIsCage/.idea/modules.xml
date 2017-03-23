@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///data/Documents/repository/WhereIsCage/WhereIsCage/WhereIsCage.iml" filepath="/data/Documents/repository/WhereIsCage/WhereIsCage/WhereIsCage.iml" />
-      <module fileurl="file:///data/Documents/repository/WhereIsCage/WhereIsCage/app/app.iml" filepath="/data/Documents/repository/WhereIsCage/WhereIsCage/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WhereIsCage.iml" filepath="$PROJECT_DIR$/WhereIsCage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
