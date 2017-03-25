@@ -2,6 +2,8 @@ package com.supinfo.app.whereiscage;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,11 +13,14 @@ import java.util.TimerTask;
 import android.content.SharedPreferences;
 
 import com.supinfo.app.whereiscage.DAL.PictureRandom;
+import com.supinfo.app.whereiscage.Utils.ScaleListener;
 
 public class PlayActivity extends AppCompatActivity {
 
     Timer timer;
     int counter;
+
+    ScaleGestureDetector SGD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +32,17 @@ public class PlayActivity extends AppCompatActivity {
         ImageView image = (ImageView) findViewById(R.id.imageView);
         image.setImageResource(srcImg.get());
 
+        SGD = new ScaleGestureDetector(this, new ScaleListener(image));
+
         // reset all prefs on reset (reset just counter ?)
         SharedPreferences preferences = getSharedPreferences("testFile", 0);
         preferences.edit().clear().apply();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        SGD.onTouchEvent(event);
+        return true;
     }
 
     private void setTimer() {
