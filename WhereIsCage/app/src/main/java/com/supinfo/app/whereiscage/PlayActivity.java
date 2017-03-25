@@ -27,8 +27,8 @@ public class PlayActivity extends AppCompatActivity {
     PointF startPoint = new PointF();
 
     float oldDist;
-    public static PointF middlePoint = new PointF();
-    public static ActionType mode = ActionType.NONE;
+    public PointF middlePoint = new PointF();
+    public ActionType mode = ActionType.NONE;
 
     View.OnTouchListener t = new View.OnTouchListener() {
         public boolean onTouch(View v, MotionEvent event) {
