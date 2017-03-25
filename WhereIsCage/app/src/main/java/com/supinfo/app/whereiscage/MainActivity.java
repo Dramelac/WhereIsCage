@@ -16,13 +16,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void startStandartGame(View view){
         Intent newFrame = new Intent(this, PlayActivity.class);
-
         startActivity(newFrame);
-
     }
 
     public void startChronoMenu(View view){
-
+        Intent newFrame = new Intent(this, ChronoMenuActivity.class);
+        startActivity(newFrame);
     }
 
     public void startScoreboardMenu(View view){
