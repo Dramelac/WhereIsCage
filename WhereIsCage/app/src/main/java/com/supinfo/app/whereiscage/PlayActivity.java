@@ -14,9 +14,7 @@ import com.supinfo.app.whereiscage.DAL.PictureRandom;
 
 public class PlayActivity extends AppCompatActivity {
 
-    //Global Variables
     Timer timer;
-    TimerTask task;
     int counter;
 
     @Override
@@ -29,20 +27,20 @@ public class PlayActivity extends AppCompatActivity {
         ImageView image = (ImageView) findViewById(R.id.imageView);
         image.setImageResource(srcImg.get());
 
-        //Make a method to make it cleaner
-        setTimer();
+        // reset all prefs on reset (reset just counter ?)
+        SharedPreferences preferences = getSharedPreferences("testFile", 0);
+        preferences.edit().clear().apply();
     }
 
     private void setTimer() {
         timer = new Timer();
-        task = new TimerTask() {
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         counter++;
-
                         TextView text = (TextView) findViewById(R.id.textView);
                         text.setText("Temps: " + String.valueOf(counter));
                     }
@@ -50,7 +48,7 @@ public class PlayActivity extends AppCompatActivity {
 
             }
         };
-
+        timer.schedule(task, 0, 1000);
     }
 
     @Override
@@ -61,7 +59,8 @@ public class PlayActivity extends AppCompatActivity {
         counter = preferences.getInt("counter", 0);
 
         //This will be called after onCreate or your activity is resumed
-        timer.schedule(task, 0, 1000);
+        setTimer();
+
     }
 
     @Override
@@ -70,7 +69,6 @@ public class PlayActivity extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("testFile", 0);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
         editor.putInt("counter", counter);
         editor.apply();
 
