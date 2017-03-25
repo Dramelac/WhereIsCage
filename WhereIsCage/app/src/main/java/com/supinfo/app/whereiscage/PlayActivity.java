@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.supinfo.app.whereiscage.DAL.PictureRandom;
 import com.supinfo.app.whereiscage.Utils.ActionType;
+import com.supinfo.app.whereiscage.Utils.Gamemode;
+import com.supinfo.app.whereiscage.Utils.SharedParam;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,6 +26,8 @@ public class PlayActivity extends AppCompatActivity {
     Timer timer;
     int counter;
     ImageView image;
+
+    Gamemode gamemode;
 
     Matrix savedMatrix = new Matrix();
     Matrix matrix = new Matrix();
@@ -91,6 +95,13 @@ public class PlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
+        Bundle param = getIntent().getExtras();
+        if(param != null && param.containsKey("gamemode")){
+            gamemode = (Gamemode) param.get("gamemode");
+        } else {
+            gamemode = Gamemode.Normal;
+        }
+
         PictureRandom srcImg = new PictureRandom();
 
         image = (ImageView) findViewById(R.id.imageView);
@@ -105,7 +116,7 @@ public class PlayActivity extends AppCompatActivity {
         float h  = ratio * w;
         Bitmap newBitMap = Bitmap.createScaledBitmap(bitmap, (int)w, (int)h, true);
         image.setImageBitmap(newBitMap);
-        SharedPreferences preferences = getSharedPreferences("testFile", 0);
+        SharedPreferences preferences = getSharedPreferences(SharedParam.PlayActivity, 0);
         preferences.edit().clear().apply();
     }
 
@@ -117,7 +128,7 @@ public class PlayActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        counter++;
+                        counter = gamemode == Gamemode.Normal ? ++counter : --counter;
                         TextView text = (TextView) findViewById(R.id.textView);
                         text.setText(String.valueOf(counter));
                     }
@@ -132,8 +143,20 @@ public class PlayActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences preferences = getSharedPreferences("testFile", 0);
-        counter = preferences.getInt("counter", 0);
+        SharedPreferences preferences = getSharedPreferences(SharedParam.PlayActivity, 0);
+
+        int defaultValue;
+        switch (gamemode){
+            case Chrono:
+                defaultValue = 120;
+                break;
+            case Chrono_two:
+                defaultValue = 300;
+                break;
+            default:
+                defaultValue = 0;
+        }
+        counter = preferences.getInt("counter", defaultValue);
 
         setTimer();
     }
@@ -142,7 +165,7 @@ public class PlayActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        SharedPreferences preferences = getSharedPreferences("testFile", 0);
+        SharedPreferences preferences = getSharedPreferences(SharedParam.PlayActivity, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("counter", counter);
         editor.apply();

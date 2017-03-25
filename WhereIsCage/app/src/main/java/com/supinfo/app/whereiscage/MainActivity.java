@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.supinfo.app.whereiscage.Utils.Gamemode;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startStandartGame(View view){
         Intent newFrame = new Intent(this, PlayActivity.class);
+        newFrame.putExtra("gamemode", Gamemode.Normal);
         startActivity(newFrame);
     }
 
