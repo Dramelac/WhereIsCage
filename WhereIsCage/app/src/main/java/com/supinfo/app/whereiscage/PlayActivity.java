@@ -7,7 +7,6 @@ import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -116,6 +115,11 @@ public class PlayActivity extends AppCompatActivity {
         float h  = ratio * w;
         Bitmap newBitMap = Bitmap.createScaledBitmap(bitmap, (int)w, (int)h, true);
         image.setImageBitmap(newBitMap);
+        float topOffset = ((this.getResources().getDisplayMetrics().heightPixels - h) / 2f) - 150;
+        matrix = image.getImageMatrix();
+        matrix.postTranslate(0, topOffset);
+        image.setImageMatrix(matrix);
+        image.invalidate();
         SharedPreferences preferences = getSharedPreferences(SharedParam.PlayActivity, 0);
         preferences.edit().clear().apply();
     }
