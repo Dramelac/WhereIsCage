@@ -1,10 +1,13 @@
 package com.supinfo.app.whereiscage;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -94,6 +97,14 @@ public class PlayActivity extends AppCompatActivity {
         image.setImageResource(srcImg.get());
         image.setOnTouchListener(t);
 
+        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+        int bitmapWidth = bitmap.getWidth();
+        int bitmapHeight = bitmap.getHeight();
+        float ratio = (float) bitmapHeight / bitmapWidth;
+        float w  = this.getResources().getDisplayMetrics().widthPixels;
+        float h  = ratio * w;
+        Bitmap newBitMap = Bitmap.createScaledBitmap(bitmap, (int)w, (int)h, true);
+        image.setImageBitmap(newBitMap);
         SharedPreferences preferences = getSharedPreferences("testFile", 0);
         preferences.edit().clear().apply();
     }
