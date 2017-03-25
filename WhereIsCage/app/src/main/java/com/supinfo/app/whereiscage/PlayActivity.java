@@ -30,7 +30,7 @@ public class PlayActivity extends AppCompatActivity {
     Gamemode gamemode;
 
     Matrix savedMatrix = new Matrix();
-    Matrix matrix = new Matrix();
+    Matrix matrix;
     PointF startPoint = new PointF();
 
     float oldDist;
@@ -108,19 +108,6 @@ public class PlayActivity extends AppCompatActivity {
         image.setOnTouchListener(t);
         applyPicture();
 
-        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
-        int bitmapWidth = bitmap.getWidth();
-        int bitmapHeight = bitmap.getHeight();
-        float ratio = (float) bitmapHeight / bitmapWidth;
-        float w = this.getResources().getDisplayMetrics().widthPixels;
-        float h = ratio * w;
-        Bitmap newBitMap = Bitmap.createScaledBitmap(bitmap, (int) w, (int) h, true);
-        image.setImageBitmap(newBitMap);
-        float topOffset = ((this.getResources().getDisplayMetrics().heightPixels - h) / 2f) - 150;
-        matrix = image.getImageMatrix();
-        matrix.postTranslate(0, topOffset);
-        image.setImageMatrix(matrix);
-        image.invalidate();
         SharedPreferences preferences = getSharedPreferences(SharedParam.PlayActivity, 0);
         preferences.edit().clear().apply();
     }
@@ -152,6 +139,19 @@ public class PlayActivity extends AppCompatActivity {
             if (choice == -1) return false;
             image.setImageResource(choice);
         }
+        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+        int bitmapWidth = bitmap.getWidth();
+        int bitmapHeight = bitmap.getHeight();
+        float ratio = (float) bitmapHeight / bitmapWidth;
+        float w = this.getResources().getDisplayMetrics().widthPixels;
+        float h = ratio * w;
+        Bitmap newBitMap = Bitmap.createScaledBitmap(bitmap, (int) w, (int) h, true);
+        image.setImageBitmap(newBitMap);
+        float topOffset = ((this.getResources().getDisplayMetrics().heightPixels - h) / 2f) - 150;
+        if (matrix == null) matrix = image.getImageMatrix();
+        matrix.setTranslate(0, topOffset);
+        image.setImageMatrix(matrix);
+
         return true;
     }
 
