@@ -24,7 +24,7 @@ public class PlayActivity extends AppCompatActivity {
 
     Matrix savedMatrix = new Matrix();
     Matrix matrix = new Matrix();
-    PointF start = new PointF();
+    PointF startPoint = new PointF();
 
     float oldDist;
     public static PointF middlePoint = new PointF();
@@ -36,7 +36,7 @@ public class PlayActivity extends AppCompatActivity {
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
                     savedMatrix.set(matrix);
-                    start.set(event.getX(), event.getY());
+                    startPoint.set(event.getX(), event.getY());
                     mode = ActionType.MOVE;
                     break;
 
@@ -54,7 +54,7 @@ public class PlayActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_MOVE:
                     if (mode == ActionType.MOVE) {
                         matrix.set(savedMatrix);
-                        matrix.postTranslate(event.getX() - start.x, event.getY() - start.y);
+                        matrix.postTranslate(event.getX() - startPoint.x, event.getY() - startPoint.y);
 
                     } else if (mode == ActionType.ZOOM) {
                         float newDist = spacing(event);
