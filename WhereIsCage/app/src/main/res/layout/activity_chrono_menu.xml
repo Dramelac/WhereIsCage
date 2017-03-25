@@ -12,16 +12,16 @@
     tools:context="com.supinfo.app.whereiscage.ChronoMenuActivity">
 
     <Button
-        android:text="Mode Chrono standart"
+        android:text="@string/mode_chrono_standart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/startChronoBtn"
-        android:onClick="startChrono (ChronoMenuActivity)" />
+        android:onClick="startChrono" />
 
     <Button
-        android:text="Mode chrono advanced"
+        android:text="@string/mode_chrono_advanced"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button3"
-        android:onClick="startChrono2 (ChronoMenuActivity)" />
+        android:onClick="startChrono2" />
 </LinearLayout>
