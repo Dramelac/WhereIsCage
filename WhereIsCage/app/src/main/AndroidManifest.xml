@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlayActivity" />
+        <activity android:name=".PlayActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ChronoMenuActivity"
             android:label="@string/title_activity_gamemenu"
             android:parentActivityName=".MainActivity" />
