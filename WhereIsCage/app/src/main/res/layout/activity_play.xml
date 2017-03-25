@@ -31,4 +31,11 @@
         android:textStyle="normal|bold"
         android:textColor="@color/colorAccent" />
 
+    <Button
+        android:text="win"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/win"
+        android:onClick="win" />
+
 </FrameLayout>

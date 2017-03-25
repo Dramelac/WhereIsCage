@@ -26,6 +26,7 @@ public class PlayActivity extends AppCompatActivity {
     int counter;
     ImageView image;
 
+    PictureRandom srcImg;
     Gamemode gamemode;
 
     Matrix savedMatrix = new Matrix();
@@ -95,25 +96,25 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
 
         Bundle param = getIntent().getExtras();
-        if(param != null && param.containsKey("gamemode")){
+        if (param != null && param.containsKey("gamemode")) {
             gamemode = (Gamemode) param.get("gamemode");
         } else {
             gamemode = Gamemode.Normal;
         }
 
-        PictureRandom srcImg = new PictureRandom();
+        srcImg = new PictureRandom();
 
         image = (ImageView) findViewById(R.id.imageView);
-        image.setImageResource(srcImg.get());
         image.setOnTouchListener(t);
+        applyPicture();
 
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         int bitmapWidth = bitmap.getWidth();
         int bitmapHeight = bitmap.getHeight();
         float ratio = (float) bitmapHeight / bitmapWidth;
-        float w  = this.getResources().getDisplayMetrics().widthPixels;
-        float h  = ratio * w;
-        Bitmap newBitMap = Bitmap.createScaledBitmap(bitmap, (int)w, (int)h, true);
+        float w = this.getResources().getDisplayMetrics().widthPixels;
+        float h = ratio * w;
+        Bitmap newBitMap = Bitmap.createScaledBitmap(bitmap, (int) w, (int) h, true);
         image.setImageBitmap(newBitMap);
         float topOffset = ((this.getResources().getDisplayMetrics().heightPixels - h) / 2f) - 150;
         matrix = image.getImageMatrix();
@@ -143,6 +144,17 @@ public class PlayActivity extends AppCompatActivity {
         timer.schedule(task, 0, 1000);
     }
 
+    private boolean applyPicture(){
+        if (gamemode == Gamemode.Normal){
+            image.setImageResource(srcImg.get());
+        } else {
+            int choice = srcImg.pop();
+            if (choice == -1) return false;
+            image.setImageResource(choice);
+        }
+        return true;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -150,7 +162,7 @@ public class PlayActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(SharedParam.PlayActivity, 0);
 
         int defaultValue;
-        switch (gamemode){
+        switch (gamemode) {
             case Chrono:
                 defaultValue = 120;
                 break;
@@ -177,7 +189,13 @@ public class PlayActivity extends AppCompatActivity {
         timer.cancel();
     }
 
-    private void Win(View view) {
+    public void win(View view) {
+
+        if (gamemode == Gamemode.Chrono_two && applyPicture()){
+            return;
+        }
+
+        // TODO : Add result score
 
         finish();
     }
