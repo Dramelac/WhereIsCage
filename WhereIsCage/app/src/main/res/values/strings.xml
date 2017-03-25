@@ -5,4 +5,6 @@
     <string name="section_format">Score of %1$d</string>
     <string name="mode_chrono_standart">Mode Chrono standart</string>
     <string name="mode_chrono_advanced">Mode chrono advanced</string>
+    <string name="picture">Picture</string>
+    <string name="bg">BG</string>
 </resources>

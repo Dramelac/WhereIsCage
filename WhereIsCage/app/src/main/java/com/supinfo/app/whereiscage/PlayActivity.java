@@ -108,7 +108,7 @@ public class PlayActivity extends AppCompatActivity {
                     public void run() {
                         counter++;
                         TextView text = (TextView) findViewById(R.id.textView);
-                        text.setText("Temps: " + String.valueOf(counter));
+                        text.setText(String.valueOf(counter));
                     }
                 });
 
@@ -139,8 +139,8 @@ public class PlayActivity extends AppCompatActivity {
         timer.cancel();
     }
 
+    private void Win(View view) {
 
-    public void surrender(View view) {
         finish();
     }
 }
