@@ -37,6 +37,7 @@ public class PlayActivity extends AppCompatActivity {
     float oldDist;
     public PointF middlePoint = new PointF();
     public ActionType mode = ActionType.NONE;
+    int foundCount = 0;
 
     View.OnTouchListener t = new View.OnTouchListener() {
         public boolean onTouch(View v, MotionEvent event) {
@@ -201,7 +202,22 @@ public class PlayActivity extends AppCompatActivity {
     public void win(View view) {
 
         if (gamemode == Gamemode.Chrono_two && counter > 0 && applyPicture()){
+            foundCount++;
             return;
+        }
+        int score;
+        switch (gamemode) {
+            case Normal:
+                score = counter;
+                break;
+            case Chrono:
+                score = 120 - counter;
+                break;
+            case Chrono_two:
+                score = foundCount;
+                break;
+            default:
+                score = 0;
         }
         Log.i("WhereIsCage", "Win");
 
