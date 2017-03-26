@@ -226,7 +226,7 @@ public class PlayActivity extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("WELL DONE ! Score: " + String.valueOf(score));
+        builder.setTitle("Well done ! Score: " + String.valueOf(score));
         final EditText input = new EditText(this);
         input.setHint("Enter a nickname");
         input.setMaxLines(1);
@@ -248,6 +248,14 @@ public class PlayActivity extends AppCompatActivity {
     public void loose(){
         timer.cancel();
         Log.i("WhereIsCage", "Loose");
-        finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("You Loose !");
+        builder.setPositiveButton("Back to main menu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.show();
     }
 }
