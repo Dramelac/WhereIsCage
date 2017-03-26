@@ -7,6 +7,7 @@ import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -123,6 +124,14 @@ public class PlayActivity extends AppCompatActivity {
                         counter = gamemode == Gamemode.Normal ? ++counter : --counter;
                         TextView text = (TextView) findViewById(R.id.textView);
                         text.setText(String.valueOf(counter));
+                        if (counter == 0){
+                            timer.cancel();
+                            if (gamemode == Gamemode.Chrono_two){
+                                win(null);
+                            } else {
+                                loose();
+                            }
+                        }
                     }
                 });
 
@@ -191,12 +200,18 @@ public class PlayActivity extends AppCompatActivity {
 
     public void win(View view) {
 
-        if (gamemode == Gamemode.Chrono_two && applyPicture()){
+        if (gamemode == Gamemode.Chrono_two && counter > 0 && applyPicture()){
             return;
         }
+        Log.i("WhereIsCage", "Win");
 
         // TODO : Add result score
 
+        finish();
+    }
+
+    public void loose(){
+        Log.i("WhereIsCage", "Loose");
         finish();
     }
 }
