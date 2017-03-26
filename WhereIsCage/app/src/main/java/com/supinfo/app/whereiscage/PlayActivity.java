@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class PlayActivity extends AppCompatActivity {
     Matrix savedMatrix = new Matrix();
     Matrix matrix;
     PointF startPoint = new PointF();
+    boolean antiForce = false;
 
     Point cageInf;
     Point cageSup;
@@ -87,22 +89,36 @@ public class PlayActivity extends AppCompatActivity {
                     break;
 
                 case MotionEvent.ACTION_UP:
+
                     float[] values = new float[9];
                     matrix.getValues(values);
 
-// values[2] and values[5] are the x,y coordinates of the top left corner of the drawable image, regardless of the zoom factor.
-// values[0] and values[4] are the zoom factors for the image's width and height respectively. If you zoom at the same factor, these should both be the same value.
-
-// event is the touch event for MotionEvent.ACTION_UP
                     int relativeX = Math.round((event.getX() - values[2]) / values[0]);
                     int relativeY = Math.round((event.getY() - values[5]) / values[4]);
                     Log.v("Position", Integer.toString(relativeX).concat(" , ").concat(Integer.toString(relativeY)));
                     Log.v("Position2", Integer.toString(cageInf.x).concat(" , ").concat(Integer.toString(cageInf.y)));
-
-                    if (relativeX >= cageInf.x && relativeX <= cageSup.x) {
-                        if (relativeY >= cageInf.y && relativeY <= cageSup.y) {
+                    if (!antiForce)
+                    {
+                        if (relativeX >= cageInf.x && relativeX <= cageSup.x && relativeY >= cageInf.y && relativeY <= cageSup.y)
+                        {
                             win(null);
                         }
+                        else
+                        {
+                            new CountDownTimer(2000, 1000) {
+
+                                public void onTick(long millisUntilFinished) {
+                                    antiForce = true;
+                                }
+
+                                public void onFinish() {
+
+                                    antiForce = false;
+                                }
+                            }.start();
+
+                        }
+
                     }
 
                 case MotionEvent.ACTION_POINTER_UP:
@@ -216,6 +232,7 @@ public class PlayActivity extends AppCompatActivity {
                 cageSup = new Point(174, 100);
                 break;
         }
+
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         int bitmapWidth = bitmap.getWidth();
         int bitmapHeight = bitmap.getHeight();
