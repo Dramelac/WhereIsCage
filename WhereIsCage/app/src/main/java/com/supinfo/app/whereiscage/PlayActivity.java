@@ -194,28 +194,6 @@ public class PlayActivity extends AppCompatActivity {
 
     private boolean applyPicture(int id) {
         image.setImageResource(id);
-        switch (id) {
-            case R.drawable.w_cage1:
-                cageInf = new Point(264, 278);
-                cageSup = new Point(282, 298);
-                break;
-            case R.drawable.w_cage2:
-                cageInf = new Point(360, 100);
-                cageSup = new Point(380, 120);
-                break;
-            case R.drawable.w_cage3:
-                cageInf = new Point(282, 220);
-                cageSup = new Point(304, 242);
-                break;
-            case R.drawable.w_cage4:
-                cageInf = new Point(593, 306);
-                cageSup = new Point(626, 336);
-                break;
-            case R.drawable.w_cage5:
-                cageInf = new Point(130, 53);
-                cageSup = new Point(174, 100);
-                break;
-        }
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         int bitmapWidth = bitmap.getWidth();
         int bitmapHeight = bitmap.getHeight();
@@ -224,6 +202,31 @@ public class PlayActivity extends AppCompatActivity {
         float h = ratio * w;
         Bitmap newBitMap = Bitmap.createScaledBitmap(bitmap, (int) w, (int) h, true);
         image.setImageBitmap(newBitMap);
+
+
+        switch (id) {
+            case R.drawable.w_cage1:
+                cageInf = new Point((int) (600 * w / 1752), (int) (640 * h / 1168));
+                cageSup = new Point((int) (630 * w / 1752), (int) (670 * h / 1168));
+                break;
+            case R.drawable.w_cage2:
+                cageInf = new Point((int) (955 * w / 2000), (int) (260 * h / 1170));
+                cageSup = new Point((int) (980 * w / 2000), (int) (300 * h / 1170));
+                break;
+            case R.drawable.w_cage3:
+                cageInf = new Point((int) (750 * w / 2000), (int) (575 * h / 1333));
+                cageSup = new Point((int) (785 * w / 2000), (int) (640 * h / 1333));
+                break;
+            case R.drawable.w_cage4:
+                cageInf = new Point((int) (1170 * w / 1500), (int) (600 * h / 1000));
+                cageSup = new Point((int) (1210 * w / 1500), (int) (650 * h / 1000));
+                break;
+            case R.drawable.w_cage5:
+                cageInf = new Point((int) (360 * w / 2000), (int) (135 * h / 1046));
+                cageSup = new Point((int) (455 * w / 2000), (int) (250 * h / 1046));
+                break;
+        }
+
         float topOffset = ((this.getResources().getDisplayMetrics().heightPixels - h) / 2f) - 150;
         if (matrix == null) matrix = image.getImageMatrix();
         matrix.setTranslate(0, topOffset);
