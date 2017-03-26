@@ -36,32 +36,3 @@ public class PictureRandom {
         return ListPictures.get(rand.nextInt(ListPictures.size()));
     }
 }
-    /*public int[] pop(){
-        if (ListPictures.size() == 0) return null;
-        int pos = rand.nextInt(ListPictures.size());
-        int[] result = new int[5];
-        result[0] = ListPictures.get(pos);
-        result[1] = ListPos.get(pos*4);
-        result[2] = ListPos.get(pos*4 + 1);
-        result[3] = ListPos.get(pos*4 + 2);
-        result[4] = ListPos.get(pos*4 + 3);
-        ListPictures.remove(pos);
-        ListPos.remove(pos*4);
-        ListPos.remove(pos*4 + 1);
-        ListPos.remove(pos*4 + 2);
-        ListPos.remove(pos*4 + 3);
-        return result;
-    }
-
-    public int[] get(){
-        if (ListPictures.size() == 0) return null;
-        int[] result = new int[5];
-        int pos = rand.nextInt(ListPictures.size());
-        result[0] = ListPictures.get(pos);
-        result[1] = ListPos.get(pos*4);
-        result[2] = ListPos.get(pos*4 + 1);
-        result[3] = ListPos.get(pos*4 + 2);
-        result[4] = ListPos.get(pos*4 + 3);
-        return result;
-
-    }*/

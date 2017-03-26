@@ -190,77 +190,39 @@ public class PlayActivity extends AppCompatActivity {
     private boolean applyPicture() {
         if (gamemode == Gamemode.Normal) {
             imageId = srcImg.get();
-            switch (imageId){
-                case R.drawable.w_cage1:
-                    cageInf = new Point(264, 278);
-                    cageSup = new Point(282, 298);
-                    break;
-                case R.drawable.w_cage2:
-                    cageInf = new Point(360, 100);
-                    cageSup = new Point(380, 120);
-                    break;
-                case R.drawable.w_cage3:
-                    cageInf = new Point(282, 220);
-                    cageSup = new Point(304, 242);
-                    break;
-                case R.drawable.w_cage4:
-                    cageInf = new Point(593, 306);
-                    cageSup = new Point(626, 336);
-                    break;
-                case R.drawable.w_cage5:
-                    cageInf = new Point(130, 53);
-                    cageSup = new Point(174, 100);
-                    break;
-            }
 
         } else {
             imageId = srcImg.pop();
             if (imageId == -1) return false;
-            switch (imageId){
-                case R.drawable.w_cage1:
-                    cageInf = new Point(264, 278);
-                    cageSup = new Point(282, 298);
-                    break;
-                case R.drawable.w_cage2:
-                    cageInf = new Point(360, 100);
-                    cageSup = new Point(380, 120);
-                    break;
-                case R.drawable.w_cage3:
-                    cageInf = new Point(282, 220);
-                    cageSup = new Point(304, 242);
-                    break;
-                case R.drawable.w_cage4:
-                    cageInf = new Point(593, 306);
-                    cageSup = new Point(626, 336);
-                    break;
-                case R.drawable.w_cage5:
-                    cageInf = new Point(130, 53);
-                    cageSup = new Point(174, 100);
-                    break;
-            }
+
         }
         return applyPicture(imageId);
     }
- /*   private boolean applyPicture() {
-        if (gamemode == Gamemode.Normal) {
-            int[] result = new int[5];
-            result = srcImg.get();
-            imageId = result[0];
-            cageInf = new Point(result[1], result[2]);
 
-            cageSup = new Point(result[3], result[4]);
-
-        } else {
-            int[] result = new int[5];
-            result = srcImg.pop();
-            imageId = result[0];
-            cageInf = new Point(result[1], result[2]);
-
-            cageSup = new Point(result[3], result[4]);
-            if (result == null) return false;*/
     private boolean applyPicture(int id) {
         image.setImageResource(id);
-
+        switch (id) {
+            case R.drawable.w_cage1:
+                cageInf = new Point(264, 278);
+                cageSup = new Point(282, 298);
+                break;
+            case R.drawable.w_cage2:
+                cageInf = new Point(360, 100);
+                cageSup = new Point(380, 120);
+                break;
+            case R.drawable.w_cage3:
+                cageInf = new Point(282, 220);
+                cageSup = new Point(304, 242);
+                break;
+            case R.drawable.w_cage4:
+                cageInf = new Point(593, 306);
+                cageSup = new Point(626, 336);
+                break;
+            case R.drawable.w_cage5:
+                cageInf = new Point(130, 53);
+                cageSup = new Point(174, 100);
+                break;
+        }
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         int bitmapWidth = bitmap.getWidth();
         int bitmapHeight = bitmap.getHeight();
