@@ -9,6 +9,14 @@
     tools:context="com.supinfo.app.whereiscage.MainActivity">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/imageView3"
+        android:layout_weight="0.82"
+        android:contentDescription="@string/picture" />
+
     <Button
         android:text="@string/play_normal"
         android:layout_width="match_parent"
