@@ -127,7 +127,7 @@ public class PlayActivity extends AppCompatActivity {
                         text.setText(String.valueOf(counter));
                         if (counter == 0){
                             timer.cancel();
-                            if (gamemode == Gamemode.Chrono_two){
+                            if (gamemode == Gamemode.Chrono_two && foundCount > 0){
                                 win(null);
                             } else {
                                 loose();
