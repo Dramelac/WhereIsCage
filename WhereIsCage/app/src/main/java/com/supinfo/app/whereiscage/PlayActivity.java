@@ -22,8 +22,6 @@ import com.supinfo.app.whereiscage.Utils.ActionType;
 import com.supinfo.app.whereiscage.Utils.Gamemode;
 import com.supinfo.app.whereiscage.Utils.SharedParam;
 
-import org.w3c.dom.Text;
-
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,6 +31,7 @@ public class PlayActivity extends AppCompatActivity {
     Timer timer;
     int counter;
     ImageView image;
+    boolean isOver = false;
 
     PictureRandom srcImg;
     Gamemode gamemode;
@@ -132,8 +131,8 @@ public class PlayActivity extends AppCompatActivity {
                         counter = gamemode == Gamemode.Normal ? ++counter : --counter;
                         TextView text = (TextView) findViewById(R.id.textView);
                         text.setText(String.valueOf(counter));
-                        if (counter == 0){
-                            if (gamemode == Gamemode.Chrono_two && foundCount > 0){
+                        if (counter == 0) {
+                            if (gamemode == Gamemode.Chrono_two && foundCount > 0) {
                                 win(null);
                             } else {
                                 loose();
@@ -147,8 +146,8 @@ public class PlayActivity extends AppCompatActivity {
         timer.schedule(task, 0, 1000);
     }
 
-    private boolean applyPicture(){
-        if (gamemode == Gamemode.Normal){
+    private boolean applyPicture() {
+        if (gamemode == Gamemode.Normal) {
             image.setImageResource(srcImg.get());
         } else {
             int choice = srcImg.pop();
@@ -206,11 +205,13 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void win(View view) {
-        foundCount++;
-        if (gamemode == Gamemode.Chrono_two && counter > 0 && applyPicture()){
+        if (!isOver) foundCount++;
+        if (gamemode == Gamemode.Chrono_two && counter > 0 && applyPicture()) {
             return;
         }
         timer.cancel();
+        isOver = true;
+
         final int score;
         switch (gamemode) {
             case Normal:
@@ -249,7 +250,7 @@ public class PlayActivity extends AppCompatActivity {
 
     }
 
-    public void loose(){
+    public void loose() {
         timer.cancel();
         Log.i("WhereIsCage", "Loose");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
