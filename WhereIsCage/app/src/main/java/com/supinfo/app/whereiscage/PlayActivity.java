@@ -1,15 +1,18 @@
 package com.supinfo.app.whereiscage;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,8 @@ import com.supinfo.app.whereiscage.DAL.PictureRandom;
 import com.supinfo.app.whereiscage.Utils.ActionType;
 import com.supinfo.app.whereiscage.Utils.Gamemode;
 import com.supinfo.app.whereiscage.Utils.SharedParam;
+
+import org.w3c.dom.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -126,7 +131,6 @@ public class PlayActivity extends AppCompatActivity {
                         TextView text = (TextView) findViewById(R.id.textView);
                         text.setText(String.valueOf(counter));
                         if (counter == 0){
-                            timer.cancel();
                             if (gamemode == Gamemode.Chrono_two && foundCount > 0){
                                 win(null);
                             } else {
@@ -205,6 +209,7 @@ public class PlayActivity extends AppCompatActivity {
             foundCount++;
             return;
         }
+        timer.cancel();
         int score;
         switch (gamemode) {
             case Normal:
@@ -219,14 +224,29 @@ public class PlayActivity extends AppCompatActivity {
             default:
                 score = 0;
         }
-        Log.i("WhereIsCage", "Win");
 
-        // TODO : Add result score
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("WELL DONE ! Score: " + String.valueOf(score));
+        final EditText input = new EditText(this);
+        input.setHint("Enter a nickname");
+        input.setMaxLines(1);
+        input.setInputType(0);
+        builder.setView(input);
+        builder.setPositiveButton("Save score", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String username = input.getText().toString();
+//                TODO: save in DB
+                finish();
+            }
+        });
 
-        finish();
+        builder.show();
+
     }
 
     public void loose(){
+        timer.cancel();
         Log.i("WhereIsCage", "Loose");
         finish();
     }
