@@ -31,6 +31,7 @@ public class PlayActivity extends AppCompatActivity {
     Timer timer;
     int counter;
     ImageView image;
+    int imageId;
     boolean isOver = false;
 
     PictureRandom srcImg;
@@ -103,6 +104,13 @@ public class PlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
+        if (savedInstanceState != null) {
+            counter = savedInstanceState.getInt("counter");
+            imageId = savedInstanceState.getInt("imageId");
+            foundCount = savedInstanceState.getInt("foundCount");
+            isOver = savedInstanceState.getBoolean("isOver");
+        }
+
         Bundle param = getIntent().getExtras();
         if (param != null && param.containsKey("gamemode")) {
             gamemode = (Gamemode) param.get("gamemode");
@@ -114,7 +122,11 @@ public class PlayActivity extends AppCompatActivity {
 
         image = (ImageView) findViewById(R.id.imageView);
         image.setOnTouchListener(t);
-        applyPicture();
+        if (imageId == 0 || imageId == -1){
+            applyPicture();
+        } else {
+            applyPicture(imageId);
+        }
 
         SharedPreferences preferences = getSharedPreferences(SharedParam.PlayActivity, 0);
         preferences.edit().clear().apply();
@@ -148,12 +160,17 @@ public class PlayActivity extends AppCompatActivity {
 
     private boolean applyPicture() {
         if (gamemode == Gamemode.Normal) {
-            image.setImageResource(srcImg.get());
+            imageId = srcImg.get();
         } else {
-            int choice = srcImg.pop();
-            if (choice == -1) return false;
-            image.setImageResource(choice);
+            imageId = srcImg.pop();
+            if (imageId == -1) return false;
         }
+        return applyPicture(imageId);
+    }
+
+    private boolean applyPicture(int id) {
+        image.setImageResource(id);
+
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         int bitmapWidth = bitmap.getWidth();
         int bitmapHeight = bitmap.getHeight();
@@ -168,6 +185,15 @@ public class PlayActivity extends AppCompatActivity {
         image.setImageMatrix(matrix);
 
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+        bundle.putInt("counter", counter);
+        bundle.putInt("imageId", imageId);
+        bundle.putInt("foundCount", foundCount);
+        bundle.putBoolean("isOver", isOver);
     }
 
     @Override
@@ -187,7 +213,9 @@ public class PlayActivity extends AppCompatActivity {
             default:
                 defaultValue = 0;
         }
-        counter = preferences.getInt("counter", defaultValue);
+        if (counter == 0) {
+            counter = preferences.getInt("counter", defaultValue);
+        }
 
         setTimer();
     }
