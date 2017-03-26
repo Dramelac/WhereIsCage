@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_chrono_menu"
     android:layout_width="match_parent"
@@ -9,19 +10,29 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.supinfo.app.whereiscage.ChronoMenuActivity">
+    tools:context="com.supinfo.app.whereiscage.ChronoMenuActivity"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_lock_idle_alarm"
+        android:id="@+id/imageView2"
+        android:layout_weight="0.36" />
 
     <Button
         android:text="@string/mode_chrono_standart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/startChronoBtn"
-        android:onClick="startChrono" />
+        android:onClick="startChrono"
+        style="@style/Widget.AppCompat.Button.Colored" />
 
     <Button
         android:text="@string/mode_chrono_advanced"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button3"
-        android:onClick="startChrono2" />
+        android:onClick="startChrono2"
+        style="@style/Widget.AppCompat.Button.Colored" />
 </LinearLayout>

@@ -10,23 +10,26 @@
 
 
     <Button
-        android:text="Play normal"
+        android:text="@string/play_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/PlayStandartBtn"
-        android:onClick="startStandartGame" />
+        android:onClick="startStandartGame"
+        style="@style/Widget.AppCompat.Button.Colored" />
 
     <Button
-        android:text="Play Chrono Mode"
+        android:text="@string/play_chrono_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/PlayChronoBtn"
-        android:onClick="startChronoMenu" />
+        android:onClick="startChronoMenu"
+        style="@style/Widget.AppCompat.Button.Colored" />
 
     <Button
-        android:text="Scoreboard"
+        android:text="@string/title_activity_scoreboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ScoreboardBtn"
-        android:onClick="startScoreboardMenu" />
+        android:onClick="startScoreboardMenu"
+        style="@style/Widget.AppCompat.Button.Colored" />
 </LinearLayout>

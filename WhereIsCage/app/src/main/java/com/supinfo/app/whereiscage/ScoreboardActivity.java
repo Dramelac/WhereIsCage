@@ -117,9 +117,9 @@ public class ScoreboardActivity extends AppCompatActivity {
                 case 0:
                     return "Normal";
                 case 1:
-                    return "Chrono 1";
+                    return "Chrono";
                 case 2:
-                    return "Chrono 2";
+                    return "Chrono endless";
             }
             return null;
         }
