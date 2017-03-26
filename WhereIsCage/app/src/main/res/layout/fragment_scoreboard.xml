@@ -8,8 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.supinfo.app.whereiscage.ScoreboardActivity$PlaceholderFragment">
 
-    <TextView
-        android:id="@+id/section_label"
+    <ListView
+        android:id="@+id/list_scoreboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

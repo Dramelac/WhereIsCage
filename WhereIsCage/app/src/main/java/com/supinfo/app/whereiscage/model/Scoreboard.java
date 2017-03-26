@@ -46,7 +46,7 @@ public class Scoreboard implements Parcelable {
 
     @Override
     public String toString(){
-        return player + ", score : " + score;
+        return player + " : " + score + " points";
     }
 
     public long getId() {

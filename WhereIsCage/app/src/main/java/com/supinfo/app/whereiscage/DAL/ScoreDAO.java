@@ -33,8 +33,16 @@ public class ScoreDAO {
     public static List<Scoreboard> getAllScoreboard(Gamemode gamemode) {
         List<Scoreboard> scoreboards = new ArrayList<>();
 
+        String order;
+
+        if (gamemode == Gamemode.Chrono_two){
+            order = "DESC";
+        } else {
+            order = "ASC";
+        }
+
         Cursor cursor = Database.Intance().getDatabase().query(DatabaseOpenHelper.TABLE,
-                DatabaseOpenHelper.allColumns, DatabaseOpenHelper.COLUMN_MODE + "=?", new String[] { String.valueOf(gamemode.value()) }, null, null, null);
+                DatabaseOpenHelper.allColumns, DatabaseOpenHelper.COLUMN_MODE + "=?", new String[] { String.valueOf(gamemode.value()) }, null, null, DatabaseOpenHelper.COLUMN_SCORE+" "+order);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {

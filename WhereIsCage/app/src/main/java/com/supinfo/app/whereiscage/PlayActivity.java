@@ -205,9 +205,8 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     public void win(View view) {
-
+        foundCount++;
         if (gamemode == Gamemode.Chrono_two && counter > 0 && applyPicture()){
-            foundCount++;
             return;
         }
         timer.cancel();
