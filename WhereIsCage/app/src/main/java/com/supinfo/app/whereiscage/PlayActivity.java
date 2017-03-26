@@ -24,6 +24,7 @@ import com.supinfo.app.whereiscage.Utils.SharedParam;
 
 import org.w3c.dom.Text;
 
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -230,14 +231,16 @@ public class PlayActivity extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setHint("Enter a nickname");
         input.setMaxLines(1);
-        input.setInputType(0);
+        input.setInputType(1);
         builder.setView(input);
         builder.setPositiveButton("Save score", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String username = input.getText().toString();
+                if (Objects.equals(username, "")) {
+                    username = "anonymous";
+                }
                 ScoreDAO.createScore(username, score, gamemode.value());
-//                TODO: save in DB
                 finish();
             }
         });
