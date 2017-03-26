@@ -1,6 +1,5 @@
 package com.supinfo.app.whereiscage;
 
-import java.io.Console;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -25,13 +24,8 @@ import com.supinfo.app.whereiscage.Utils.Gamemode;
 import com.supinfo.app.whereiscage.Utils.SharedParam;
 
 import java.util.Objects;
-import org.w3c.dom.Text;
-
-import java.io.Console;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static java.lang.System.out;
 
 public class PlayActivity extends AppCompatActivity {
 
@@ -103,11 +97,10 @@ public class PlayActivity extends AppCompatActivity {
                     int relativeX = Math.round((event.getX() - values[2]) / values[0]);
                     int relativeY = Math.round((event.getY() - values[5]) / values[4]);
                     Log.v("Position", Integer.toString(relativeX).concat(" , ").concat(Integer.toString(relativeY)));
+                    Log.v("Position2", Integer.toString(cageInf.x).concat(" , ").concat(Integer.toString(cageInf.y)));
 
-                    if(relativeX >= cageInf.x && relativeX <= cageSup.x)
-                    {
-                        if(relativeY >= cageInf.y && relativeY <= cageSup.y)
-                        {
+                    if (relativeX >= cageInf.x && relativeX <= cageSup.x) {
+                        if (relativeY >= cageInf.y && relativeY <= cageSup.y) {
                             win(null);
                         }
                     }
@@ -151,7 +144,7 @@ public class PlayActivity extends AppCompatActivity {
 
         image = (ImageView) findViewById(R.id.imageView);
         image.setOnTouchListener(t);
-        if (imageId == 0 || imageId == -1){
+        if (imageId == 0 || imageId == -1) {
             applyPicture();
         } else {
             applyPicture(imageId);
