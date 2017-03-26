@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.supinfo.app.whereiscage.DAL.PictureRandom;
+import com.supinfo.app.whereiscage.DAL.ScoreDAO;
 import com.supinfo.app.whereiscage.Utils.ActionType;
 import com.supinfo.app.whereiscage.Utils.Gamemode;
 import com.supinfo.app.whereiscage.Utils.SharedParam;
@@ -210,7 +211,7 @@ public class PlayActivity extends AppCompatActivity {
             return;
         }
         timer.cancel();
-        int score;
+        final int score;
         switch (gamemode) {
             case Normal:
                 score = counter;
@@ -236,6 +237,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String username = input.getText().toString();
+                ScoreDAO.createScore(username, score, gamemode.value());
 //                TODO: save in DB
                 finish();
             }

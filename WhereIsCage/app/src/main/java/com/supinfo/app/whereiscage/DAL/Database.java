@@ -15,6 +15,12 @@ public class Database {
         db = new DatabaseOpenHelper(context);
     }
 
+    @Override
+    public void finalize() throws Throwable {
+        close();
+        super.finalize();
+    }
+
     public static Database Init(Context context){
         _instance = new Database(context);
         _instance.open();

@@ -8,8 +8,6 @@ import android.view.View;
 import com.supinfo.app.whereiscage.DAL.Database;
 import com.supinfo.app.whereiscage.Utils.Gamemode;
 
-import java.sql.SQLException;
-
 public class MainActivity extends AppCompatActivity {
 
 
@@ -21,32 +19,19 @@ public class MainActivity extends AppCompatActivity {
         Database.Init(this);
     }
 
-    public void startStandartGame(View view){
+    public void startStandartGame(View view) {
         Intent newFrame = new Intent(this, PlayActivity.class);
         newFrame.putExtra("gamemode", Gamemode.Normal);
-        startActivity(newFrame);
+        startActivityForResult(newFrame, 1);
     }
 
-    public void startChronoMenu(View view){
+    public void startChronoMenu(View view) {
         Intent newFrame = new Intent(this, ChronoMenuActivity.class);
         startActivity(newFrame);
     }
 
-    public void startScoreboardMenu(View view){
+    public void startScoreboardMenu(View view) {
         Intent newFrame = new Intent(this, ScoreboardActivity.class);
         startActivity(newFrame);
     }
-
-    @Override
-    protected void onResume() {
-        Database.Intance().open();
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        Database.Intance().close();
-        super.onPause();
-    }
-
 }
